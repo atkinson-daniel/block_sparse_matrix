@@ -11,6 +11,9 @@ class BlockSparseMatrix
 public:
   int num_rows;
   int num_cols;
+  BlockSparseMatrix(int rows_, int cols_) : num_rows(rows_), num_cols(cols_), data(cols_) {};
+
+private:
   RedBlackTree<DenseMatrix> data;
 };
 
