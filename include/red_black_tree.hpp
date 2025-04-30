@@ -38,28 +38,27 @@ public:
   void insert(T data, int row, int col)
   {
     Node *node = new Node(data, row, col, num_cols);
-    // bst_insert(node);
+    bst_insert(node);
     node->color = BLACK;
-    root = node;
+    // TODO: Rebalance tree
   }
 
 private:
   int num_cols;
   Node *root;
-  /*
   void bst_insert(Node *new_node)
   {
-    if (*root == nullptr)
+    if (root == nullptr)
     {
-      *root = new_node;
+      root = new_node;
       return;
     }
 
-    Node *current_node = *root;
+    Node *current_node = root;
 
     while (current_node != nullptr)
     {
-      if (new_node->data < current_node->data)
+      if (new_node->key < current_node->key)
       {
         if (current_node->left == nullptr)
         {
@@ -85,7 +84,6 @@ private:
       }
     }
   }
-  */
 };
 
 #endif // RED_BLACK_TREE_CPP
