@@ -23,8 +23,9 @@ public:
     Color color;
     Node *left;
     Node *right;
+    Node *parent;
     // Calculate key based on position in matrix
-    Node(T value, int row, int col, int num_cols) : data(value), key(num_cols * row + col), color(RED), left(nullptr), right(nullptr) {};
+    Node(T value, int row, int col, int num_cols) : data(value), key(num_cols * row + col), color(RED), left(nullptr), right(nullptr), parent(nullptr) {};
   };
 
   RedBlackTree(int num_cols_) : root(nullptr), num_cols(num_cols_) {};
@@ -39,7 +40,8 @@ public:
   {
     Node *node = new Node(data, row, col, num_cols);
     bst_insert(node);
-    node->color = BLACK;
+    node->color = RED;
+    bst_rebalance(node);
     // TODO: Rebalance tree
   }
 
@@ -70,6 +72,7 @@ public:
 private:
   int num_cols;
   Node *root;
+
   void bst_insert(Node *new_node)
   {
     if (root == nullptr)
@@ -106,6 +109,87 @@ private:
           current_node = current_node->right;
         }
       }
+    }
+  }
+
+  Node *RBTreeGetGrandparent(Node *node)
+  {
+    if (node->parent == nullptr)
+    {
+      return nullptr;
+    }
+
+    return node->parent->parent;
+  }
+
+  Node *RBTreeGetUncle(Node *node)
+  {
+    Node *grandparent = nullptr;
+    if (node->parent != nullptr)
+    {
+      grandparent = node->parent->parent;
+    }
+    if (grandparent == nullptr)
+    {
+      return nullptr;
+    }
+    if (grandparent->left == node->parent)
+    {
+      return grandparent->right;
+    }
+    else
+    {
+      return grandparent->left;
+    }
+  }
+
+  void bst_rebalance(Node *new_node)
+  {
+    if (new_node->parent == nullptr)
+    {
+      new_node->color = BLACK;
+      return;
+    }
+
+    if (new_node->parent->color == BLACK)
+    {
+      return;
+    }
+
+    Node *parent = new_node->parent;
+    Node *grandparent = RBTreeGetGrandparent(new_node);
+    Node *uncle = RBTreeGetUncle(new_node);
+
+    if (uncle != nullptr && uncle->color == RED)
+    {
+      uncle->color = BLACK;
+      parent->color = BLACK;
+      grandparent->color = RED;
+      bst_rebalance(grandparent);
+      return;
+    }
+    if (new_node == parent->right && parent == grandparent->left)
+    {
+      RBTreeRotateLeft(parent);
+      new_node = parent;
+      parent = new_node->parent;
+    }
+    else if (new_node == parent->left && parent == grandparent->right)
+    {
+      RBTreeRotateRight(parent);
+      new_node = parent;
+      parent = new_node->parent;
+    }
+    parent->color = BLACK;
+    grandparent->color = RED;
+
+    if (new_node == parent->left)
+    {
+      RBTreeRotateRight(grandparent);
+    }
+    else
+    {
+      RBTreeRotateLeft(grandparent);
     }
   }
 };
