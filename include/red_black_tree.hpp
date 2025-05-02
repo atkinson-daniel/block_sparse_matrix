@@ -43,6 +43,30 @@ public:
     // TODO: Rebalance tree
   }
 
+  Node &find(int row, int col)
+  {
+    int target_key = num_cols * row + col;
+    Node *current_node = root;
+
+    while (current_node != nullptr)
+    {
+      if (target_key < current_node->key)
+      {
+        current_node = current_node->left;
+      }
+      else if (target_key > current_node->key)
+      {
+        current_node = current_node->right;
+      }
+      else
+      {
+        return *current_node;
+      }
+    }
+
+    throw std::runtime_error("Node not found");
+  }
+
 private:
   int num_cols;
   Node *root;
