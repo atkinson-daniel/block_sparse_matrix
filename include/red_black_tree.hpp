@@ -112,7 +112,7 @@ private:
     }
   }
 
-  Node *RBTreeGetGrandparent(Node *node)
+  Node *get_grandparent(Node *node)
   {
     if (node->parent == nullptr)
     {
@@ -122,7 +122,7 @@ private:
     return node->parent->parent;
   }
 
-  Node *RBTreeGetUncle(Node *node)
+  Node *get_uncle(Node *node)
   {
     Node *grandparent = nullptr;
     if (node->parent != nullptr)
@@ -143,7 +143,7 @@ private:
     }
   }
 
-  bool RBTreeSetChild(Node *parent, std::string whichChild, Node *child)
+  bool set_child(Node *parent, std::string whichChild, Node *child)
   {
     if (whichChild != "left" && whichChild != "right")
     {
@@ -165,26 +165,26 @@ private:
     return true;
   }
 
-  bool RBTreeReplaceChild(Node *parent, Node *currentChild, Node *newChild)
+  bool replace_child(Node *parent, Node *currentChild, Node *newChild)
   {
     if (parent->left == currentChild)
     {
-      return RBTreeSetChild(parent, "left", newChild);
+      return set_child(parent, "left", newChild);
     }
     else if (parent->right == currentChild)
     {
-      return RBTreeSetChild(parent, "right", newChild);
+      return set_child(parent, "right", newChild);
     }
     return false;
   }
 
-  void RBTreeRotateLeft(Node *node)
+  void rotate_left(Node *node)
   {
     {
       Node *rightLeftChild = node->right->left;
       if (node->parent != nullptr)
       {
-        RBTreeReplaceChild(node->parent, node, node->right);
+        replace_child(node->parent, node, node->right);
       }
       else
       {
@@ -192,25 +192,25 @@ private:
         root->parent = nullptr;
       }
 
-      RBTreeSetChild(node->right, "left", node);
-      RBTreeSetChild(node, "right", rightLeftChild);
+      set_child(node->right, "left", node);
+      set_child(node, "right", rightLeftChild);
     }
   }
 
-  void RBTreeRotateRight(Node *node)
+  void rotate_right(Node *node)
   {
     Node *leftRightChild = node->left->right;
     if (node->parent != nullptr)
     {
-      RBTreeReplaceChild(node->parent, node, node->left);
+      replace_child(node->parent, node, node->left);
     }
     else
     { // node is root
       root = node->left;
       root->parent = nullptr;
     }
-    RBTreeSetChild(node->left, "right", node);
-    RBTreeSetChild(node, "left", leftRightChild);
+    set_child(node->left, "right", node);
+    set_child(node, "left", leftRightChild);
   }
 
   void bst_rebalance(Node *new_node)
@@ -227,8 +227,8 @@ private:
     }
 
     Node *parent = new_node->parent;
-    Node *grandparent = RBTreeGetGrandparent(new_node);
-    Node *uncle = RBTreeGetUncle(new_node);
+    Node *grandparent = get_grandparent(new_node);
+    Node *uncle = get_uncle(new_node);
 
     if (uncle != nullptr && uncle->color == RED)
     {
@@ -240,13 +240,13 @@ private:
     }
     if (new_node == parent->right && parent == grandparent->left)
     {
-      RBTreeRotateLeft(parent);
+      rotate_left(parent);
       new_node = parent;
       parent = new_node->parent;
     }
     else if (new_node == parent->left && parent == grandparent->right)
     {
-      RBTreeRotateRight(parent);
+      rotate_right(parent);
       new_node = parent;
       parent = new_node->parent;
     }
@@ -255,11 +255,11 @@ private:
 
     if (new_node == parent->left)
     {
-      RBTreeRotateRight(grandparent);
+      rotate_right(grandparent);
     }
     else
     {
-      RBTreeRotateLeft(grandparent);
+      rotate_left(grandparent);
     }
   }
 };
