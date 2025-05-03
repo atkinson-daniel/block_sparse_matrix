@@ -31,9 +31,9 @@ public:
   RedBlackTree(int num_cols_) : root(nullptr), num_cols(num_cols_) {};
 
   // Test if data was set correctly
-  Node &get_root()
+  Node *get_root()
   {
-    return *root;
+    return root;
   }
   // TODO: Modify later to avoid copy of data
   void insert(T data, int row, int col)
@@ -102,6 +102,7 @@ private:
         if (current_node->right == nullptr)
         {
           current_node->right = new_node;
+          new_node->parent = current_node;
           current_node = nullptr;
         }
         else
