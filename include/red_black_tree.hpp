@@ -40,7 +40,6 @@ public:
   {
     Node *node = new Node(data, row, col, num_cols);
     bst_insert(node);
-    node->color = RED;
     bst_rebalance(node);
     // TODO: Rebalance tree
   }
@@ -90,6 +89,7 @@ private:
         if (current_node->left == nullptr)
         {
           current_node->left = new_node;
+          new_node->parent = current_node;
           current_node = nullptr;
         }
         else
