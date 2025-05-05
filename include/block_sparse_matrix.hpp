@@ -56,6 +56,11 @@ public:
     data.remove(row, col);
   };
 
+  void print_tree()
+  {
+    data.print_tree();
+  };
+
 protected:
   RedBlackTree<DenseMatrix> data;
 };

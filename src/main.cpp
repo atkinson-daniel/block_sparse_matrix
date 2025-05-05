@@ -21,8 +21,12 @@ int main()
   bsm[0, 1] = dense_matrix4;
   std::cout << bsm << std::endl;
 
+  bsm.print_tree();
+
   bsm.erase(1, 0);
   std::cout << bsm << std::endl;
+
+  bsm.print_tree();
 
   /*
     RedBlackTree<DenseMatrix> rbt(10);

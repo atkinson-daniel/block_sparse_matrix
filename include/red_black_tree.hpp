@@ -42,7 +42,6 @@ public:
     Node *node = new Node(data, row, col, num_cols);
     bst_insert(node);
     bst_rebalance(node);
-    // TODO: Rebalance tree
   }
 
   void remove(int row, int col)
@@ -86,7 +85,7 @@ public:
 
   void print_tree()
   {
-    print_helper(root, "", true);
+    print_helper("", get_root(), false);
   };
 
 private:
@@ -510,26 +509,20 @@ private:
     delete node;
   }
 
-  void print_helper(Node *root, std::string indent, bool last)
+  void print_helper(const std::string &prefix, const Node *node, bool isLeft)
   {
-    if (root != nullptr)
+    if (node != nullptr)
     {
-      std::cout << indent;
-      if (last)
-      {
-        std::cout << "R----";
-        indent += "   ";
-      }
-      else
-      {
-        std::cout << "L----";
-        indent += "|  ";
-      }
-      std::string sColor = (root->color == RED) ? "RED" : "BLACK";
-      std::cout << root->data << "(" << sColor << ")"
-                << std::endl;
-      print_helper(root->left, indent, false);
-      print_helper(root->right, indent, true);
+      std::cout << prefix;
+
+      std::cout << (isLeft ? "├──" : "└──");
+
+      // print the value of the node
+      std::cout << node->key << ' ' << (node->color == 0 ? 'R' : 'B') << std::endl;
+
+      // enter the next tree level - left and right branch
+      print_helper(prefix + (isLeft ? "│   " : "    "), node->left, true);
+      print_helper(prefix + (isLeft ? "│   " : "    "), node->right, false);
     }
   };
 
