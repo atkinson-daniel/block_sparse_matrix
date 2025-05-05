@@ -51,6 +51,11 @@ public:
     return os;
   };
 
+  void erase(int row, int col)
+  {
+    data.remove(row, col);
+  };
+
 protected:
   RedBlackTree<DenseMatrix> data;
 };

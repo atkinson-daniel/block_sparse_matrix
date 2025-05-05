@@ -21,6 +21,9 @@ int main()
   bsm[0, 1] = dense_matrix4;
   std::cout << bsm << std::endl;
 
+  bsm.erase(1, 0);
+  std::cout << bsm << std::endl;
+
   /*
     RedBlackTree<DenseMatrix> rbt(10);
     rbt.insert(dense_matrix1, 0, 0);
