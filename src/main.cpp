@@ -18,20 +18,11 @@ int main()
   rbt.insert(dense_matrix3, 2, 0);
   rbt.insert(dense_matrix4, 1, 1);
 
-  if (auto *node = rbt.find(2, 0))
-  {
-    std::cout << node->data << std::endl;
-  }
+  rbt.print_tree();
 
   rbt.remove(2, 0);
-  if (auto *node = rbt.find(2, 0))
-  {
-    std::cout << node->data << std::endl;
-  }
-  else
-  {
-    std::cout << "Node (2, 0) not found — it was removed.\n";
-  }
+
+  rbt.print_tree();
 
   return 0;
 }

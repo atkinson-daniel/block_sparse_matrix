@@ -79,6 +79,11 @@ public:
     return nullptr;
   }
 
+  void print_tree()
+  {
+    print_helper(root, "", true);
+  };
+
 private:
   int num_cols;
 
@@ -579,6 +584,29 @@ private:
 
     bst_remove(node->key);
   }
+
+  void print_helper(Node *root, std::string indent, bool last)
+  {
+    if (root != nullptr)
+    {
+      std::cout << indent;
+      if (last)
+      {
+        std::cout << "R----";
+        indent += "   ";
+      }
+      else
+      {
+        std::cout << "L----";
+        indent += "|  ";
+      }
+      std::string sColor = (root->color == RED) ? "RED" : "BLACK";
+      std::cout << root->data << "(" << sColor << ")"
+                << std::endl;
+      print_helper(root->left, indent, false);
+      print_helper(root->right, indent, true);
+    }
+  };
 };
 
 #endif // RED_BLACK_TREE_CPP
