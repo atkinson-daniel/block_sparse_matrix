@@ -576,18 +576,40 @@ private:
     if (node->left != nullptr && node->right != nullptr)
     {
       Node *predecessor = get_predecessor(node);
-      int predecessor_key = predecessor->key;
+
+      node->key = predecessor->key;
+      node->data = predecessor->data;
+
       bst_remove_node(predecessor);
-      node->key = predecessor_key;
       return;
     }
+
+    Node *child = (node->left != nullptr) ? node->left : node->right;
 
     if (node->color == BLACK)
     {
       prepare_for_removal(node);
     }
 
-    bst_remove(node->key);
+    if (child != nullptr)
+    {
+      child->parent = node->parent;
+    }
+
+    if (node->parent == nullptr)
+    {
+      root = child;
+    }
+    else if (node == node->parent->left)
+    {
+      node->parent->left = child;
+    }
+    else
+    {
+      node->parent->right = child;
+    }
+
+    delete node;
   }
 
   void print_helper(Node *root, std::string indent, bool last)

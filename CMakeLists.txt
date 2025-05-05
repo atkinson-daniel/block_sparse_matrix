@@ -6,6 +6,7 @@ project(SparseMatrix VERSION 1.0)
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_BUILD_TYPE DEBUG)
 
 # Include directories
 include_directories(include)
