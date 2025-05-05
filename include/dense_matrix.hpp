@@ -38,4 +38,4 @@ public:
   };
 };
 
-#endif // DENSE_MATRIX_CPP
+#endif // DENSE_MATRIX_HPP

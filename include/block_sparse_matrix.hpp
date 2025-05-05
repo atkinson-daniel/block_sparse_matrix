@@ -17,4 +17,4 @@ private:
   RedBlackTree<DenseMatrix> data;
 };
 
-#endif // BLOCK_SPARSE_MATRIX_CPP
+#endif // BLOCK_SPARSE_MATRIX_HPP
