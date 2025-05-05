@@ -23,6 +23,12 @@ public:
     data[idx] = val;
   }
 
+  double &operator[](int r_idx, int c_idx)
+  {
+    int idx = num_cols * r_idx + c_idx;
+    return data[idx];
+  }
+
   // feed std::ostream protected info from Matrix
   friend std::ostream &operator<<(std::ostream &os, const DenseMatrix &matrix)
   {
