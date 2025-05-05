@@ -16,7 +16,7 @@ int main()
   rbt.insert(dense_matrix3, 2, 0);
   rbt.insert(dense_matrix4, 1, 1);
   // Test if root is set correctly
-  // std::cout << rbt.find(2, 0).data << std::endl;
-  rbt.print_tree(rbt.get_root());
+  std::cout << rbt.find(2, 0).data << std::endl;
+  // rbt.print_tree(rbt.get_root());
   return 0;
 }
