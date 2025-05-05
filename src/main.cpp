@@ -1,4 +1,5 @@
-#include <red_black_tree.hpp>
+#include <iostream>
+#include "red_black_tree.hpp"
 
 int main()
 {
@@ -10,13 +11,27 @@ int main()
   dense_matrix2(0, 0, 7.0);
   dense_matrix3(2, 0, 1.1);
   dense_matrix4(0, 0, 6.6);
+
   RedBlackTree<DenseMatrix> rbt(10);
   rbt.insert(dense_matrix1, 0, 0);
   rbt.insert(dense_matrix2, 1, 0);
   rbt.insert(dense_matrix3, 2, 0);
   rbt.insert(dense_matrix4, 1, 1);
-  // Test if root is set correctly
-  std::cout << rbt.find(2, 0).data << std::endl;
-  // rbt.print_tree(rbt.get_root());
+
+  if (auto *node = rbt.find(2, 0))
+  {
+    std::cout << node->data << std::endl;
+  }
+
+  rbt.remove(2, 0);
+  if (auto *node = rbt.find(2, 0))
+  {
+    std::cout << node->data << std::endl;
+  }
+  else
+  {
+    std::cout << "Node (2, 0) not found — it was removed.\n";
+  }
+
   return 0;
 }
