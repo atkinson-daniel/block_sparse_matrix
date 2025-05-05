@@ -79,6 +79,11 @@ public:
     return nullptr;
   }
 
+  int size()
+  {
+    return size_helper(get_root());
+  }
+
   void print_tree()
   {
     print_helper(root, "", true);
@@ -607,6 +612,16 @@ private:
       print_helper(root->right, indent, true);
     }
   };
+
+  int size_helper(Node *node)
+  {
+    if (node == nullptr)
+    {
+      return 0;
+    }
+
+    return 1 + size_helper(node->left) + size_helper(node->right);
+  }
 };
 
 #endif // RED_BLACK_TREE_CPP

@@ -18,11 +18,13 @@ int main()
   rbt.insert(dense_matrix3, 2, 0);
   rbt.insert(dense_matrix4, 1, 1);
 
-  rbt.print_tree();
+  std::cout << rbt.size() << std::endl;
+  // rbt.print_tree();
 
   rbt.remove(2, 0);
+  std::cout << rbt.size() << std::endl;
 
-  rbt.print_tree();
+  // rbt.print_tree();
 
   return 0;
 }
