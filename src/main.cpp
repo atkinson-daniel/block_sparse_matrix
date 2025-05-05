@@ -4,18 +4,21 @@
 
 int main()
 {
-  BlockSparseMatrix bsm(4, 4);
+  BlockSparseMatrix bsm(2, 2, 4, 4);
 
   DenseMatrix dense_matrix1(4, 4);
   DenseMatrix dense_matrix2(4, 4);
   DenseMatrix dense_matrix3(4, 4);
   DenseMatrix dense_matrix4(4, 4);
-  dense_matrix1(0, 0, 9.0);
-  dense_matrix2(0, 0, 7.0);
-  dense_matrix3(2, 0, 1.1);
-  dense_matrix4(0, 0, 6.6);
+  dense_matrix1(0, 0, 1);
+  dense_matrix2(0, 0, 2);
+  dense_matrix3(2, 0, 3);
+  dense_matrix4(0, 0, 4);
 
   bsm[0, 0] = dense_matrix1;
+  bsm[1, 1] = dense_matrix2;
+  bsm[1, 0] = dense_matrix3;
+  bsm[0, 1] = dense_matrix4;
   std::cout << bsm << std::endl;
 
   /*
