@@ -47,12 +47,16 @@ int main()
   bsm.print_tree();
   auto [rowptr, col, vals] = bsm.export_BCSR();
 
+  std::cout << "rowptr: ";
+
   for (auto el : rowptr)
   {
     std::cout << el << " ";
   }
 
   std::cout << std::endl;
+
+  std::cout << "col: ";
 
   for (auto el : col)
   {
