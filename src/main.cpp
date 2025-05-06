@@ -1,44 +1,41 @@
 #include <iostream>
+#include <functional>
+#include <random>
 #include "red_black_tree.hpp"
 #include "block_sparse_matrix.hpp"
 
 int main()
 {
-  BlockSparseMatrix bsm(2, 2, 4, 4);
+  BlockSparseMatrix bsm(5, 5, 3, 3);
+  std::vector<std::reference_wrapper<DenseMatrix>> d_matrices = {
+      bsm[0, 0],
+      bsm[0, 1],
+      bsm[0, 2],
+      bsm[1, 0],
+      bsm[1, 1],
+      bsm[1, 2],
+      bsm[2, 3],
+      bsm[2, 4],
+      bsm[3, 1],
+      bsm[4, 2]};
 
-  DenseMatrix dense_matrix1(4, 4);
-  DenseMatrix dense_matrix2(4, 4);
-  DenseMatrix dense_matrix3(4, 4);
-  DenseMatrix dense_matrix4(4, 4);
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_real_distribution<> idx(0, 3);
+  std::uniform_real_distribution<> val(0, 10);
 
-  dense_matrix1(0, 0, 1);
-  dense_matrix1(1, 1, 1);
-  dense_matrix1(2, 2, 1);
-  dense_matrix1(3, 3, 1);
-  dense_matrix1(0, 1, 1);
-
-  dense_matrix2(0, 0, 2);
-  dense_matrix2(1, 1, 2);
-  dense_matrix2(2, 2, 2);
-  dense_matrix2(3, 3, 2);
-  dense_matrix2(0, 1, 2);
-
-  dense_matrix3(0, 0, 3);
-  dense_matrix3(1, 1, 3);
-  dense_matrix3(2, 2, 3);
-  dense_matrix3(3, 3, 3);
-  dense_matrix3(0, 1, 3);
-
-  dense_matrix4(0, 0, 4);
-  dense_matrix4(1, 1, 4);
-  dense_matrix4(2, 2, 4);
-  dense_matrix4(3, 3, 4);
-  dense_matrix4(0, 1, 4);
-
-  bsm[0, 0] = dense_matrix1;
-  bsm[1, 1] = dense_matrix2;
-  bsm[1, 0] = dense_matrix3;
-  bsm[0, 1] = dense_matrix4;
+  for (int i = 0; i < 10; i++)
+  {
+    d_matrices[i].get()(int(idx(gen)), int(idx(gen)), int(val(gen)));
+    d_matrices[i].get()(int(idx(gen)), int(idx(gen)), int(val(gen)));
+    d_matrices[i].get()(int(idx(gen)), int(idx(gen)), int(val(gen)));
+    d_matrices[i].get()(int(idx(gen)), int(idx(gen)), int(val(gen)));
+    d_matrices[i].get()(int(idx(gen)), int(idx(gen)), int(val(gen)));
+    d_matrices[i].get()(int(idx(gen)), int(idx(gen)), int(val(gen)));
+    d_matrices[i].get()(int(idx(gen)), int(idx(gen)), int(val(gen)));
+    d_matrices[i].get()(int(idx(gen)), int(idx(gen)), int(val(gen)));
+    d_matrices[i].get()(int(idx(gen)), int(idx(gen)), int(val(gen)));
+  }
 
   std::cout << bsm << std::endl;
 

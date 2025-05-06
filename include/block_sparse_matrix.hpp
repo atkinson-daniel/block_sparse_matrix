@@ -14,10 +14,15 @@ public:
   int b_rows;   // num of rows in a single block
   int b_cols;   // num of cols in a single block
   BlockSparseMatrix(int rows_, int cols_, int b_rows_, int b_cols_) : num_rows(rows_), num_cols(cols_), b_rows(b_rows_), b_cols(b_cols_), data(cols_) {};
+
   DenseMatrix &operator[](int row, int col)
   {
     // initialize the space in the RBT with empty data
-    data.insert(DenseMatrix(4, 4), row, col);
+    if (data.find(row, col) == nullptr)
+    {
+      data.insert(DenseMatrix(b_rows, b_cols), row, col);
+    }
+
     return data.find(row, col)->data;
   };
 
