@@ -18,10 +18,10 @@ The user is able to insert and retreive a dense matrix into a block of the block
 
 The user is also able to remove a block from the block sparse matrix by using the `erase` method. The user passes in a row value and col valuse to the method. The method will then call upon the Red Black Tree class to locate the node, delete the node, and rebalance the tree when necessary.
 
+### DOK and BSCR Export
+
+Tthis project exports a block compressed sparse row (BSCR) format matrix for usage in optimize numerical methods (see [this resource](https://netlib.org/linalg/html_templates/node93.html) for more info). The user can access the `export_BSCR` method on the block sparse matrix to retrieve this information.
+
 ## Storage Implementation with a Red Black Tree
 
 Various data structures can be used to store a block sparse matrix, but this project leverages a red black tree for optimal efficiency. It offers significant flexibility, enabling the user to efficiently insert, remove, and retrieve blocks without needing to know the sparsity pattern of the matrix in advance. With prior knowledge of the sparsity patern, construction and retrevial of all blocks is O(n) with n being the number of blocks. Without prior knowledge (which is what this projects assumes from the user), it's O(N\*Log(n)). It's giving up a small logirthimic term, but allows full flexibility for the user. This is very useful when designing and testing numerical methods since at the beginning the final block structure might not be known.
-
-## Future Iterations
-
-Ideally this project would export a block compressed sparse row (BSCR) format matrix for future usage in optimize numerical methods (see [this resource](https://netlib.org/linalg/html_templates/node93.html) for more info). A future feature would be to implement an `export_BSCR` method on the block sparse matrix to retrieve this information.
