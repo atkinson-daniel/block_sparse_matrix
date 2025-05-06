@@ -16,15 +16,24 @@ The user is able to insert and retrieve a dense matrix into a block of the block
 
 The project includes a function to print both the matrix and the red-black tree to the console. Given the seeded data in the main.cpp file, here's an example of what the matrix and red-black tree will look like when printed to the console:
 
+<img width="217" alt="Screenshot 2025-05-05 at 9 04 14 PM" src="https://github.com/user-attachments/assets/2e12629f-aaf2-4543-8a6b-8b02278fd1e8" />
+
 ### Block Sparse Matrix Removal
 
 The user is also able to remove a block from the block sparse matrix by using the `erase` method. The user passes in a row value and col valuse to the method. The method will then call upon the Red Black Tree class to locate the node, delete the node, and rebalance the tree when necessary.
 
 After removal of a node, the print helper function shows the udpated matrix and red-black tree:
 
+<img width="211" alt="Screenshot 2025-05-05 at 9 04 32 PM" src="https://github.com/user-attachments/assets/58bf95ea-1060-42b5-a00a-6affb7393b84" />
+
 ### DOK and BSCR Export
 
 This project exports a block compressed sparse row (BSCR) format matrix for usage in optimized numerical methods (see [this resource](https://netlib.org/linalg/html_templates/node93.html) for more info). The user can access the `export_BSCR` method on the block sparse matrix to retrieve this information.
+
+For the final obtain matrix after insertion and erasers, the screenshot below shows the cooresponding rowptr and col containers of the BCSR format:
+
+<img width="214" alt="Screenshot 2025-05-05 at 9 11 40 PM" src="https://github.com/user-attachments/assets/019744d5-a6a3-4535-8954-26d7e3471234" />
+
 
 ## Storage Implementation with a Red Black Tree
 
