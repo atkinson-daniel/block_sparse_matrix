@@ -14,9 +14,13 @@ Block Sparse Matrix and Dense Matrix are publically accessible classes. The unde
 
 The user is able to insert and retrieve a dense matrix into a block of the block sparse matrix by using the `[]` operator. The `[]` operator returns a reference to a pre-existing dense matrix if it's already been inserted, otherwise it inserts a zero block and gives back its reference. The user can insert a dense matrix by passing in a row value and a column value to the `[]` and obtain a reference that they can use as a lvalue to pass in an already created dense matrix by using `=` or modify the block in-place.
 
+The project includes a function to print both the matrix and the red-black tree to the console. Given the seeded data in the main.cpp file, here's an example of what the matrix and red-black tree will look like when printed to the console:
+
 ### Block Sparse Matrix Removal
 
 The user is also able to remove a block from the block sparse matrix by using the `erase` method. The user passes in a row value and col valuse to the method. The method will then call upon the Red Black Tree class to locate the node, delete the node, and rebalance the tree when necessary.
+
+After removal of a node, the print helper function shows the udpated matrix and red-black tree:
 
 ### DOK and BSCR Export
 
