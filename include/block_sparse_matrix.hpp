@@ -9,10 +9,10 @@
 class BlockSparseMatrix
 {
 public:
-  int num_rows; // number of block rows
-  int num_cols; // number of block cols
-  int b_rows;   // num of rows in a single block
-  int b_cols;   // num of cols in a single block
+  const int num_rows; // number of block rows
+  const int num_cols; // number of block cols
+  int b_rows;         // num of rows in a single block
+  int b_cols;         // num of cols in a single block
   BlockSparseMatrix(int rows_, int cols_, int b_rows_, int b_cols_) : num_rows(rows_), num_cols(cols_), b_rows(b_rows_), b_cols(b_cols_), data(cols_) {};
 
   DenseMatrix &operator[](int row, int col)
@@ -65,6 +65,45 @@ public:
   {
     data.print_tree();
   };
+
+  std::tuple<std::vector<int>, std::vector<int>, std::vector<DenseMatrix>> export_DOK()
+  {
+    std::vector<int> row, col;
+    std::vector<DenseMatrix> val;
+
+    data.to_vector(data.get_root(), val, row, col);
+
+    return std::make_tuple(row, col, val);
+  }
+
+  std::tuple<std::vector<int>, std::vector<int>, std::vector<DenseMatrix>> export_BCSR()
+  {
+    std::vector<int> rowptr;
+    std::vector<int> col;
+    std::vector<DenseMatrix> val;
+
+    auto [row_dok, col_dok, val_dok] = export_DOK();
+
+    rowptr.push_back(0);
+
+    int row_n = 0;
+    for (int i = 0; i < col_dok.size(); ++i)
+    {
+      val.push_back(val_dok[i]);
+      col.push_back(col_dok[i]);
+
+      if (row_n != row_dok[i])
+      {
+        // Return index
+        rowptr.push_back(col.size() - 1);
+        row_n = row_dok[i];
+      }
+    }
+
+    rowptr.push_back(col.size());
+
+    return std::make_tuple(rowptr, col, val);
+  }
 
 protected:
   RedBlackTree<DenseMatrix> data;

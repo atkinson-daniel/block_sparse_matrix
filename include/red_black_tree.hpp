@@ -19,13 +19,15 @@ public:
   struct Node
   {
     T data;
+    int row;
+    int col;
     int key;
     Color color;
     Node *left;
     Node *right;
     Node *parent;
     // Calculate key based on position in matrix
-    Node(T value, int row, int col, int num_cols) : data(value), key(num_cols * row + col), color(RED), left(nullptr), right(nullptr), parent(nullptr) {};
+    Node(T value, int row, int col, int num_cols) : data(value), row(row), col(col), key(num_cols * row + col), color(RED), left(nullptr), right(nullptr), parent(nullptr) {};
   };
 
   Node *root;
@@ -87,6 +89,20 @@ public:
   {
     print_helper("", get_root(), false);
   };
+
+  void to_vector(Node *node, std::vector<T> &vec, std::vector<int> &row, std::vector<int> &col)
+  {
+    if (node == nullptr)
+    {
+      return;
+    }
+
+    to_vector(node->left, vec, row, col);
+    vec.push_back(node->data);
+    col.push_back(node->col);
+    row.push_back(node->row);
+    to_vector(node->right, vec, row, col);
+  }
 
 private:
   int num_cols;
@@ -476,6 +492,8 @@ private:
 
       node->key = predecessor->key;
       node->data = predecessor->data;
+      node->row = predecessor->row;
+      node->col = predecessor->col;
 
       bst_remove_node(predecessor);
       return;
