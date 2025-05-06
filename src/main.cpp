@@ -8,16 +8,16 @@ int main()
 {
   BlockSparseMatrix bsm(5, 5, 3, 3);
   std::vector<std::reference_wrapper<DenseMatrix>> d_matrices = {
-      bsm[0, 0],
-      bsm[0, 1],
-      bsm[0, 2],
-      bsm[1, 0],
-      bsm[1, 1],
-      bsm[1, 2],
-      bsm[2, 3],
-      bsm[2, 4],
-      bsm[3, 1],
-      bsm[4, 2]};
+      bsm[0, 0],  // key = 0
+      bsm[0, 1],  // key = 1
+      bsm[0, 2],  // key = 2
+      bsm[1, 0],  // key = 5
+      bsm[1, 1],  // key = 6
+      bsm[1, 2],  // key = 7
+      bsm[2, 3],  // key = 13
+      bsm[2, 4],  // key = 14
+      bsm[3, 1],  // key = 16
+      bsm[4, 2]}; // key = 22
 
   std::random_device rd;
   std::mt19937 gen(rd());

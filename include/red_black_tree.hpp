@@ -130,6 +130,8 @@ private:
         }
       }
     }
+
+    bst_rebalance(new_node);
   }
 
   Node *get_grandparent(Node *node)
@@ -435,12 +437,10 @@ private:
       sibling = get_sibling(node);
     }
     if (case3(node, sibling))
-      ;
     {
       return;
     }
     if (case4(node, sibling))
-      ;
     {
       return;
     }
