@@ -25,5 +25,3 @@ Various data structures can be used to store a block sparse matrix, but this pro
 ## Future Iterations
 
 Ideally this project would export a block compressed sparse row (BSCR) format matrix for future usage in optimize numerical methods (see [this resource](https://netlib.org/linalg/html_templates/node93.html) for more info). A future feature would be to implement an `export_BSCR` method on the block sparse matrix to retrieve this information.
-
-## Examples
