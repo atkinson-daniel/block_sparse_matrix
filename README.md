@@ -6,6 +6,14 @@ This project implements an efficient block sparse matrix container. Block sparse
 
 To manage the blocks, a Red-Black Tree is used, ensuring efficient O(log(n)) operations for block insertion, removal, and retrieval. Each node in the tree contains a dense matrix (represented as a vector), along with row and column indices, and maintains the standard red-black tree structure.
 
+## How to run locally
+
+1. Clone the Project using: `git@github.com:atkinson-daniel/block_sparse_matrix.git`
+2. Configure and build the project with cmake.
+3. Run the resulting executable named `main`.
+
+You will a radomly generated block sparse matrix, it's stored red-black tree, the resulting block sparse matrix after eraser of a fixed block at row 1 col 0, the resulting red-black tree, and the BCSR output.
+
 ## Features
 
 Block Sparse Matrix and Dense Matrix are publically accessible classes. The underlying storage via a Red Black Tree is meant to be obfuscated from the user. The user is allowed insert and remove from the Block Sparse Matrix.
@@ -33,7 +41,6 @@ This project exports a block compressed sparse row (BSCR) format matrix for usag
 For the final obtain matrix after insertion and erasers, the screenshot below shows the cooresponding rowptr and col containers of the BCSR format:
 
 <img width="214" alt="Screenshot 2025-05-05 at 9 11 40 PM" src="https://github.com/user-attachments/assets/019744d5-a6a3-4535-8954-26d7e3471234" />
-
 
 ## Storage Implementation with a Red Black Tree
 

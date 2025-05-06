@@ -68,6 +68,7 @@ int main()
   for (auto el : vals)
   {
     std::cout << el << " ";
+    std::cout << std::endl;
   }
 
   std::cout << std::endl;
